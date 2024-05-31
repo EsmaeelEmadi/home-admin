@@ -18,8 +18,8 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
 {children}
                     </AntdRegistry>
       
-    </div>
-            </body>
+            </div>
+            </body>  
         </html>
   );
 };
