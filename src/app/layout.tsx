@@ -1,4 +1,4 @@
-// ── components 
+// ── components
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 // ── types
@@ -9,18 +9,13 @@ import type { FC, PropsWithChildren } from "react";
 //          ╰─────────────────────────────────────────────────────────╯
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
-        <html lang="en">
-            <body>
-                
-    <div>
-                    
-      <AntdRegistry>
-{children}
-                    </AntdRegistry>
-      
-                 </div>
-            </body>  
-        </html>
+    <html lang="en">
+      <body>
+        <div>
+          <AntdRegistry>{children}</AntdRegistry>
+        </div>
+      </body>
+    </html>
   );
 };
 
