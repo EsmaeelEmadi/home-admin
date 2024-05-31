@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
+    "@ant-design/nextjs-registry": "^1.0.0",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.16",
     "@reduxjs/toolkit": "^2.2.3",
