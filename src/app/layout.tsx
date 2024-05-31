@@ -1,5 +1,6 @@
-// ── components
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+
+// ── components
 
 // ── types
 import type { FC, PropsWithChildren } from "react";
