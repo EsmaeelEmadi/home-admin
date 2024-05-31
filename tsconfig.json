@@ -21,7 +21,7 @@
     "types": ["@testing-library/jest-dom"],
     "baseUrl": ".",
     "paths": {
-      "@/material/*": ["src/lib/components/material/*"],
+      "@/ant/*": ["src/lib/components/ant/*"],
       "@/elements/*": ["src/lib/components/common/elements/*"],
       "@/layouts/*": ["src/lib/components/common/layouts/*"],
       "@/providers/*": ["src/lib/components/utility/providers/*"],
