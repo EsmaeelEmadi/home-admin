@@ -23,6 +23,9 @@
     "sourceType": "module"
   },
   "rules": {
+    "arrow-body-style": "off",
+    "react/function-component-definition": "off",
+    "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-filename-extension": [
       1,
