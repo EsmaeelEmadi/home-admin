@@ -11,7 +11,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "incremental": true,
     "plugins": [
       {
@@ -24,6 +24,7 @@
       "@/ant": ["src/lib/components/ant/index.ts"],
       "@/elements/*": ["src/lib/components/common/elements/*"],
       "@/layouts/*": ["src/lib/components/common/layouts/*"],
+      "@/svgs": ["src/lib/components/svgs/index.ts"],
       "@/providers/*": ["src/lib/components/utility/providers/*"],
       "@/features/*": ["src/lib/components/features/*"],
       "@/themes/*": ["src/lib/themes/*"],
