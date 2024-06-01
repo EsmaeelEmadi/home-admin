@@ -8,7 +8,7 @@ import classNames from "classnames";
 import { Layout, Menu } from "@/ant";
 // icons
 import { MessageOutlined } from "@ant-design/icons";
-import { LogoTypeSvg, LogoSvg } from "src/lib/components/svgs";
+import { LogoTypeSvg, LogoSvg } from "@/svgs";
 // hooks
 import { useDashboardContext } from "@/features/dashboard/provider/Provider";
 
