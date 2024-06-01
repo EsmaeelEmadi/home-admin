@@ -1,11 +1,26 @@
-// ── types
+"use client";
+
+// components
+import { Layout } from "@/ant";
+
+// types
 import type { FC } from "react";
 
+const { Content } = Layout;
+
 //          ╭─────────────────────────────────────────────────────────╮
-//          │                        component                        │
+//          │                        component                             │
 //          ╰─────────────────────────────────────────────────────────╯
+
+/**
+ * NOTE: this page will be removed
+ */
 const RootPage: FC = () => {
-  return <h1>Hello World</h1>;
+  return (
+    <Content>
+      <h1>holy moly</h1>
+    </Content>
+  );
 };
 
 export default RootPage;
