@@ -22,7 +22,7 @@ const LoginPage: FC = () => {
 
   return (
     <div>
-      <LogoTypeSvg className="ml-8 w-48 fill-blue-600 h-fit mb-8" />
+      <LogoTypeSvg className="ml-8 w-48 fill-blue-600 h-fit mb-4" />
       <div className="p-14 bg-white shadow-2xl rounded-xl bg-[url('/images/jpg/bg.jpg')]">
         <div className="mb-6">
           <Title level={3} className="mb-1">
