@@ -1,8 +1,5 @@
 "use client";
 
-// types
-import type { FC } from "react";
-// main
 import classNames from "classnames";
 // components
 import { Layout, Menu } from "@/ant";
@@ -11,11 +8,10 @@ import { MessageOutlined } from "@ant-design/icons";
 import { LogoTypeSvg, LogoSvg } from "@/svgs";
 // hooks
 import { useDashboardContext } from "@/features/dashboard/provider/Provider";
+// types
+import type { FC } from "react";
 
-//          ╭─────────────────────────────────────────────────────────╮
-//          │                        component                        │
-//          ╰─────────────────────────────────────────────────────────╯
-
+// variables
 const { Sider } = Layout;
 
 export const DashboardSider: FC = () => {

@@ -1,15 +1,16 @@
 "use client";
 
-// types
-import type { FC, PropsWithChildren } from "react";
-//  components
+// components
 import { Layout, Flex } from "@/ant";
 import { DashboardHeader } from "@/features/dashboard/header/Header";
 import { DashboardSider } from "@/features/dashboard/sider/Sider";
 import { DashboardBreadcramb } from "@/features/dashboard/breadcrumb/Breadcrumb";
 //  providers
 import { DashboardContextProvider } from "@/features/dashboard/provider/Provider";
+// types
+import type { FC, PropsWithChildren } from "react";
 
+// variables
 const { Content } = Layout;
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {

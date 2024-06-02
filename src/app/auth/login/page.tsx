@@ -9,10 +9,7 @@ import Link from "next/link";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { LogoTypeSvg } from "@/svgs";
 
-//          ╭─────────────────────────────────────────────────────────╮
-//          │                        component                        │
-//          ╰─────────────────────────────────────────────────────────╯
-
+// variables
 const { Title, Text } = Typography;
 
 const LoginPage: FC = () => {

@@ -7,7 +7,8 @@ import {
   useCallback,
   useMemo,
 } from "react";
-// ── types
+
+// types
 import type { FC, PropsWithChildren } from "react";
 
 export interface IDashboardContext {

@@ -1,11 +1,12 @@
 "use client";
 
+import { useCallback } from "react";
 import { usePathname } from "next/navigation";
-
+// components
 import { Breadcrumb } from "@/ant";
-
-import { useCallback, type FC } from "react";
 import Link from "next/link";
+// types
+import type { FC } from "react";
 
 export const DashboardBreadcramb: FC = () => {
   const pathname = usePathname();

@@ -1,18 +1,15 @@
 "use client";
 
-// types
-import type { FC } from "react";
 // components
 import { Button, Form, Input, Typography } from "antd";
 import Link from "next/link";
 // icons
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import { LogoTypeSvg } from "@/svgs";
+// types
+import type { FC } from "react";
 
-//          ╭─────────────────────────────────────────────────────────╮
-//          │                        component                        │
-//          ╰─────────────────────────────────────────────────────────╯
-
+// variables
 const { Title, Text } = Typography;
 
 const RegisterPage: FC = () => {

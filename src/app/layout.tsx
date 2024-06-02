@@ -1,19 +1,13 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { StrictMode } from "react";
-
-// ── components
+// components
 import { App, ConfigProvider } from "@/ant";
-
-// ── types
-import type { FC, PropsWithChildren } from "react";
-
-// ── styles
+// styles
 import ANT_DEFAULT_THEME from "@/themes/ant/default";
 import "./index.scss";
+// types
+import type { FC, PropsWithChildren } from "react";
 
-//          ╭─────────────────────────────────────────────────────────╮
-//          │                        component                        │
-//          ╰─────────────────────────────────────────────────────────╯
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <StrictMode>

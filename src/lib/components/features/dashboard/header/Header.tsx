@@ -1,8 +1,5 @@
 "use client";
 
-// types
-import type { FC } from "react";
-import type { MenuProps } from "antd";
 // main
 import classNames from "classnames";
 // hooks
@@ -11,11 +8,11 @@ import { useDashboardContext } from "@/features/dashboard/provider/Provider";
 import { Layout, Button, Avatar, Dropdown } from "@/ant";
 // icons
 import { LeftOutlined, UserOutlined, MenuOutlined } from "@ant-design/icons";
+// types
+import type { FC } from "react";
+import type { MenuProps } from "antd";
 
-//          ╭─────────────────────────────────────────────────────────╮
-//          │                        component                        │
-//          ╰─────────────────────────────────────────────────────────╯
-
+// variables
 const { Header } = Layout;
 
 const items: MenuProps["items"] = [
