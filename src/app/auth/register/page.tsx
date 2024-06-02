@@ -52,6 +52,7 @@ const RegisterPage: FC = () => {
               placeholder="Email"
             />
           </Form.Item>
+
           <Form.Item
             name="username"
             rules={[{ required: true, message: "Please input your Username!" }]}
@@ -61,6 +62,28 @@ const RegisterPage: FC = () => {
               placeholder="Username"
             />
           </Form.Item>
+
+          <Form.Item
+            name="firstName"
+            rules={[
+              { required: true, message: "Please input your First Name!" },
+            ]}
+          >
+            <Input placeholder="First Name" />
+          </Form.Item>
+
+          <Form.Item
+            name="lastName"
+            rules={[
+              { required: true, message: "Please input your Last Name!" },
+            ]}
+          >
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Last Name"
+            />
+          </Form.Item>
+
           <Form.Item
             name="password"
             rules={[{ required: true, message: "Please input your Password!" }]}
