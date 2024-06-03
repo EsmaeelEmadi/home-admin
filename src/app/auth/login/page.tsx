@@ -7,7 +7,6 @@ import { Button, Checkbox, Form, Input, Typography } from "antd";
 import Link from "next/link";
 // icons
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { LogoTypeSvg } from "@/svgs";
 
 // variables
 const { Title, Text } = Typography;
@@ -19,8 +18,7 @@ const LoginPage: FC = () => {
 
   return (
     <div>
-      <LogoTypeSvg className="ml-8 w-48 fill-blue-600 h-fit mb-4" />
-      <div className="p-14 bg-white shadow-2xl rounded-xl bg-[url('/images/jpg/bg.jpg')]">
+      <div className="p-14 shadow-2xl rounded-xl bg-white dark:bg-dark">
         <div className="mb-6">
           <Title level={3} className="mb-1">
             Login

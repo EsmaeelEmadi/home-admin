@@ -1,25 +1,28 @@
+"use client";
+
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { StrictMode } from "react";
 // components
-import { App, ConfigProvider } from "@/ant";
+import { App } from "@/ant";
 // styles
-import ANT_DEFAULT_THEME from "@/themes/ant/default";
+// import ANT_DEFAULT_THEME from "@/themes/ant/default";
 import "./index.scss";
 // types
 import type { FC, PropsWithChildren } from "react";
+import { AppContextProvider } from "@/components/utility/providers/AppProvider";
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <StrictMode>
-      <html lang="en" className="h-full">
-        <body className="m-0 h-full">
-          <AntdRegistry>
-            <ConfigProvider theme={ANT_DEFAULT_THEME}>
+      <AntdRegistry>
+        <html lang="en" className="h-full">
+          <body className="m-0 h-full">
+            <AppContextProvider storageName="admin-theme">
               <App className="h-full">{children}</App>
-            </ConfigProvider>
-          </AntdRegistry>
-        </body>
-      </html>
+            </AppContextProvider>
+          </body>
+        </html>
+      </AntdRegistry>
     </StrictMode>
   );
 };

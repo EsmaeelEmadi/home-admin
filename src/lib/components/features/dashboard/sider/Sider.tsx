@@ -2,12 +2,13 @@
 
 import classNames from "classnames";
 // components
-import { Layout, Menu } from "@/ant";
+import { Layout, Menu, theme } from "@/ant";
 // icons
 import { MessageOutlined } from "@ant-design/icons";
 import { LogoTypeSvg, LogoSvg } from "@/svgs";
 // hooks
 import { useDashboardContext } from "@/features/dashboard/provider/Provider";
+import { useRouter } from "next/navigation";
 // types
 import type { FC } from "react";
 
@@ -15,6 +16,7 @@ import type { FC } from "react";
 const { Sider } = Layout;
 
 export const DashboardSider: FC = () => {
+  const { push } = useRouter();
   const { isSiderCollapsed } = useDashboardContext();
 
   return (
@@ -58,11 +60,13 @@ export const DashboardSider: FC = () => {
                   label: "List",
                   type: "item",
                   key: "2",
+                  onClick: () => push("/dashboard/property"),
                 },
                 {
                   label: "Create",
                   type: "item",
                   key: "3",
+                  onClick: () => push("/dashboard/property/create"),
                 },
               ],
             },

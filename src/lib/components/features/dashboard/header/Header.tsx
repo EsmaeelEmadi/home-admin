@@ -1,13 +1,19 @@
 "use client";
 
-// main
 import classNames from "classnames";
 // hooks
 import { useDashboardContext } from "@/features/dashboard/provider/Provider";
+import { useAppContext } from "@/providers/AppProvider";
 // components
-import { Layout, Button, Avatar, Dropdown } from "@/ant";
+import { Layout, Button, Avatar, Menu } from "@/ant";
 // icons
-import { LeftOutlined, UserOutlined, MenuOutlined } from "@ant-design/icons";
+import {
+  LeftOutlined,
+  UserOutlined,
+  MenuOutlined,
+  MoonOutlined,
+  SunOutlined,
+} from "@ant-design/icons";
 // types
 import type { FC } from "react";
 import type { MenuProps } from "antd";
@@ -15,26 +21,23 @@ import type { MenuProps } from "antd";
 // variables
 const { Header } = Layout;
 
-const items: MenuProps["items"] = [
-  {
-    key: "1",
-    label: "Item 1",
-  },
-  {
-    key: "2",
-    label: "Item 2",
-  },
-  {
-    key: "3",
-    label: "Item 3",
-  },
-];
-
 export const DashboardHeader: FC = () => {
+  const { toggleTheme, theme } = useAppContext();
+
   const { isSiderCollapsed, toggleSiderCollapse } = useDashboardContext();
 
+  const onClick: MenuProps["onClick"] = (e) => {
+    if (e.key === "theme") {
+      toggleTheme();
+    }
+  };
+
   return (
-    <Header className="bg-white rounded-3xl h-[60px] px-2 flex place-content-between items-center">
+    <Header
+      className={classNames(
+        "rounded-3xl h-[60px] px-2 flex place-content-between items-center",
+      )}
+    >
       <Button
         type="link"
         className="m-2"
@@ -48,20 +51,36 @@ export const DashboardHeader: FC = () => {
         onClick={toggleSiderCollapse}
         shape="circle"
       />
-      <div className="mr-2 flex gap-2">
-        <Dropdown
-          trigger={["click"]}
-          menu={{
-            items,
-            selectable: false,
-            defaultSelectedKeys: ["3"],
-          }}
-        >
-          <Button type="link" shape="circle" icon={<MenuOutlined />} />
-        </Dropdown>
-
-        <Avatar icon={<UserOutlined />} />
+      <div className="-mr-4 flex gap-2">
+        <Menu
+          className="w-56 bg-transparent border-none"
+          selectable={false}
+          onClick={onClick}
+          mode="horizontal"
+          items={[
+            {
+              label: "Settings",
+              key: "SubMenu",
+              icon: <MenuOutlined />,
+              children: [
+                {
+                  label: "Theme",
+                  icon: theme === "dark" ? <SunOutlined /> : <MoonOutlined />,
+                  key: "theme",
+                },
+              ],
+            },
+            {
+              label: "Profile",
+              key: "profile",
+              icon: <UserOutlined />,
+            },
+          ]}
+          triggerSubMenuAction="click"
+        />
       </div>
     </Header>
   );
 };
+
+<Avatar icon={<UserOutlined />} />;

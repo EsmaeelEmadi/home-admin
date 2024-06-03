@@ -5,7 +5,6 @@ import { Button, Form, Input, Typography } from "antd";
 import Link from "next/link";
 // icons
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
-import { LogoTypeSvg } from "@/svgs";
 // types
 import type { FC } from "react";
 
@@ -19,8 +18,7 @@ const RegisterPage: FC = () => {
 
   return (
     <div>
-      <LogoTypeSvg className="ml-8 w-48 fill-blue-600 h-fit mb-4" />
-      <div className="p-14 bg-white shadow-2xl rounded-xl bg-[url('/images/jpg/bg.jpg')]">
+      <div className="p-14 shadow-2xl rounded-xl bg-white dark:bg-dark">
         <div className="mb-6">
           <Title level={3} className="mb-1">
             Register
@@ -102,8 +100,7 @@ const RegisterPage: FC = () => {
                 Register
               </Button>
               <div>
-                Or <Link href="/auth/register">Login</Link> If you have an
-                account
+                Or <Link href="/auth/login">Login</Link> If you have an account
               </div>
             </div>
           </Form.Item>
