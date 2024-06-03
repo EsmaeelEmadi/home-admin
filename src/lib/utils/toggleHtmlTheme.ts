@@ -1,8 +1,15 @@
-export const toggleHtmlTheme = () => {
-  const htmlTag = document.getElementsByName("html")[0];
+// types
+import { TTheme } from "@/types/general";
+
+export const toggleHtmlTheme = (theme: TTheme) => {
+  const htmlTag = document.getElementsByTagName("html")[0];
   if (!htmlTag) {
     throw new Error("no html tag could be found in the document!");
   }
 
-  htmlTag.classList.toggle("dark");
+  if (theme === "dark") {
+    htmlTag.classList.add("dark");
+  } else {
+    htmlTag.classList.remove("dark");
+  }
 };
