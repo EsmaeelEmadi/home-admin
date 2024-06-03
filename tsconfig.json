@@ -27,6 +27,7 @@
       "@/svgs": ["src/lib/components/svgs/index.ts"],
       "@/providers/*": ["src/lib/components/utility/providers/*"],
       "@/features/*": ["src/lib/components/features/*"],
+      "@/components/*": ["src/lib/components/*"],
       "@/themes/*": ["src/lib/themes/*"],
       "@/types/*": ["src/lib/types/*"],
       "@/utils/*": ["src/lib/utils/*"],
