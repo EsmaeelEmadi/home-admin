@@ -2,7 +2,6 @@
 
 import classNames from "classnames";
 // hooks
-import { useDashboardContext } from "@/features/dashboard/provider/Provider";
 import { useAppContext } from "@/providers/AppProvider";
 // components
 import { Layout, Button, Avatar, Menu } from "@/ant";
@@ -17,14 +16,18 @@ import {
 // types
 import type { FC } from "react";
 import type { MenuProps } from "antd";
+import type { ISider } from "../types";
 
 // variables
 const { Header } = Layout;
 
-export const DashboardHeader: FC = () => {
-  const { toggleTheme, theme } = useAppContext();
+interface DashboardHeaderProps extends ISider {}
 
-  const { isSiderCollapsed, toggleSiderCollapse } = useDashboardContext();
+export const DashboardHeader: FC<DashboardHeaderProps> = ({
+  isCollapsed,
+  toggleCollapse,
+}) => {
+  const { toggleTheme, theme } = useAppContext();
 
   const onClick: MenuProps["onClick"] = (e) => {
     if (e.key === "theme") {
@@ -44,11 +47,11 @@ export const DashboardHeader: FC = () => {
         icon={
           <LeftOutlined
             className={classNames("transition-all", {
-              "rotate-180": isSiderCollapsed,
+              "rotate-180": isCollapsed,
             })}
           />
         }
-        onClick={toggleSiderCollapse}
+        onClick={toggleCollapse}
         shape="circle"
       />
       <div className="-mr-4 flex gap-2">

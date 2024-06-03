@@ -2,26 +2,27 @@
 
 import classNames from "classnames";
 // components
-import { Layout, Menu, theme } from "@/ant";
+import { Layout, Menu } from "@/ant";
 // icons
 import { MessageOutlined } from "@ant-design/icons";
 import { LogoTypeSvg, LogoSvg } from "@/svgs";
 // hooks
-import { useDashboardContext } from "@/features/dashboard/provider/Provider";
 import { useRouter } from "next/navigation";
 // types
 import type { FC } from "react";
+import type { ISider } from "../types";
 
 // variables
 const { Sider } = Layout;
 
-export const DashboardSider: FC = () => {
+interface DashboardSiderProps extends Omit<ISider, "toggleCollapse"> {}
+
+export const DashboardSider: FC<DashboardSiderProps> = ({ isCollapsed }) => {
   const { push } = useRouter();
-  const { isSiderCollapsed } = useDashboardContext();
 
   return (
     <Sider
-      collapsed={isSiderCollapsed}
+      collapsed={isCollapsed}
       theme="light"
       className="rounded-3xl"
       collapsedWidth={60}
@@ -32,7 +33,7 @@ export const DashboardSider: FC = () => {
             className={classNames(
               "fill-blue-600 transition-all duration-200 ease-in h-fit w-[22px]",
               {
-                hidden: !isSiderCollapsed,
+                hidden: !isCollapsed,
               },
             )}
           />
@@ -40,7 +41,7 @@ export const DashboardSider: FC = () => {
             className={classNames(
               "fill-blue-600 transition-all duration-200 ease-in h-fit w-[110px]",
               {
-                hidden: isSiderCollapsed,
+                hidden: isCollapsed,
               },
             )}
           />
