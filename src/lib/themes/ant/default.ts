@@ -1,5 +1,23 @@
-const ANT_DEFAULT_THEME = {
-  token: {},
+"use client";
+
+import { theme } from "@/ant";
+// types
+import type { ThemeConfig } from "antd";
+
+export const DARK_THEME: ThemeConfig = {
+  algorithm: theme.darkAlgorithm,
+  components: {
+    Layout: {
+      colorBgHeader: "#141414",
+    },
+  },
 } as const;
 
-export default ANT_DEFAULT_THEME;
+export const LIGHT_THEME: ThemeConfig = {
+  algorithm: theme.defaultAlgorithm,
+  components: {
+    Layout: {
+      colorBgHeader: "#ffffff",
+    },
+  },
+} as const;
