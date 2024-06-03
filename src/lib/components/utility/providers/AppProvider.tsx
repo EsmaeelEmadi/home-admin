@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  useMemo,
   useState,
   useEffect,
   useContext,
@@ -44,13 +43,6 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({
     setTheme(newTheme);
   }, [theme, storageName]);
 
-  const value = useMemo(() => {
-    return {
-      theme,
-      toggleTheme,
-    };
-  }, [theme, toggleTheme]);
-
   useEffect(() => {
     const storedTheme = localStorage.getItem(storageName) as TTheme | undefined;
     const newTheme = storedTheme ?? "light";
@@ -61,7 +53,16 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({
 
   if (!isInitiated) return null;
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider
+      value={{
+        theme,
+        toggleTheme,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 export const useAppContext = () => {
