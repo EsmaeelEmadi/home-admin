@@ -23,6 +23,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "import/order": "off",
     "no-restricted-syntax": "off",
     "import/extensions": "off",
     "import/prefer-default-export": "off",
