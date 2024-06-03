@@ -28,6 +28,7 @@
     "import/extensions": "off",
     "import/prefer-default-export": "off",
     "arrow-body-style": "off",
+    "react/jsx-no-constructed-context-values": "off",
     "react/function-component-definition": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
