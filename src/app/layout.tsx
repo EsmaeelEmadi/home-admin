@@ -6,7 +6,7 @@ import { StrictMode } from "react";
 import { App } from "@/ant";
 // styles
 // import ANT_DEFAULT_THEME from "@/themes/ant/default";
-import "./index.scss";
+import "./index.css";
 // types
 import type { FC, PropsWithChildren } from "react";
 import { AppContextProvider } from "@/components/utility/providers/AppProvider";
