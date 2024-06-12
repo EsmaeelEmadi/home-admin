@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ant-notification-stack > .ant-notification-notice-wrapper {
+  transition:
+    transform 0.3s,
+    backdrop-filter 0s !important;
+}
