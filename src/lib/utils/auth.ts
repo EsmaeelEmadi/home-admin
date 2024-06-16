@@ -138,13 +138,15 @@ export const isAuthenticated: TIsAuthenticated = async () => {
 
     try {
       const res = await refreshService(credentials);
+      console.log({ res });
 
-      if (res.status === 201) {
-        storeCredentials(res.data);
-        return true;
-      }
+      // if (res.status === 201) {
+      // storeCredentials(res.data);
+      storeCredentials(res);
+      return true;
+      // }
 
-      return false;
+      // return false;
     } catch (error) {
       return false;
     }
