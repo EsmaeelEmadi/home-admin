@@ -1,10 +1,18 @@
 "use client";
 
 import classNames from "classnames";
+
 // hooks
+import { useCallback, memo } from "react";
 import { useAppContext } from "@/providers/AppProvider";
+
+// helpers
+import { logout } from "@/utils/axios/services/auth";
+import { useRouter } from "next/navigation";
+
 // components
-import { Layout, Button, Avatar, Menu } from "@/ant";
+import { Layout, Button, Menu, notification } from "@/ant";
+
 // icons
 import {
   LeftOutlined,
@@ -12,78 +20,118 @@ import {
   MenuOutlined,
   MoonOutlined,
   SunOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
+
 // types
-import type { FC } from "react";
 import type { MenuProps } from "antd";
 import type { ISider } from "../types";
+import { AxiosError } from "axios";
+
+interface DashboardHeaderProps extends ISider {}
 
 // variables
 const { Header } = Layout;
 
-interface DashboardHeaderProps extends ISider {}
+export const DashboardHeader = memo<DashboardHeaderProps>(
+  ({ isCollapsed, toggleCollapse }) => {
+    const [api, contextHolder] = notification.useNotification();
 
-export const DashboardHeader: FC<DashboardHeaderProps> = ({
-  isCollapsed,
-  toggleCollapse,
-}) => {
-  const { toggleTheme, theme } = useAppContext();
+    const { replace } = useRouter();
+    const { toggleTheme, theme } = useAppContext();
 
-  const onClick: MenuProps["onClick"] = (e) => {
-    if (e.key === "theme") {
-      toggleTheme();
-    }
-  };
+    const notif = useCallback(
+      (method: "error", message: string, description: string) => {
+        api[method]({
+          message,
+          description,
+          duration: 5,
+          closable: true,
+          placement: "bottomLeft",
+        });
+      },
+      [api],
+    );
 
-  return (
-    <Header
-      className={classNames(
-        "rounded-3xl h-[60px] px-2 flex place-content-between items-center",
-      )}
-    >
-      <Button
-        type="link"
-        className="m-2"
-        icon={
-          <LeftOutlined
-            className={classNames("transition-all", {
-              "rotate-180": isCollapsed,
-            })}
+    const onClick: MenuProps["onClick"] = (e) => {
+      if (e.key === "theme") {
+        toggleTheme();
+      } else if (e.key === "logout") {
+        console.log("logout");
+        logout()
+          .then((data) => {
+            console.log({ data });
+            replace("/auth/login");
+          })
+          .catch((error) => {
+            if (error instanceof AxiosError) {
+              notif("error", "Error", error.message);
+            } else {
+              notif("error", "Error", "Unexpected Error");
+            }
+          });
+      }
+    };
+
+    return (
+      <>
+        {contextHolder}
+        <Header
+          className={classNames(
+            "rounded-3xl h-[60px] px-2 flex place-content-between items-center",
+          )}
+        >
+          <Button
+            type="link"
+            className="m-2"
+            icon={
+              <LeftOutlined
+                className={classNames("transition-all", {
+                  "rotate-180": isCollapsed,
+                })}
+              />
+            }
+            onClick={toggleCollapse}
+            shape="circle"
           />
-        }
-        onClick={toggleCollapse}
-        shape="circle"
-      />
-      <div className="-mr-4 flex gap-2">
-        <Menu
-          className="w-56 bg-transparent border-none"
-          selectable={false}
-          onClick={onClick}
-          mode="horizontal"
-          items={[
-            {
-              label: "Settings",
-              key: "SubMenu",
-              icon: <MenuOutlined />,
-              children: [
+          <div className="-mr-4 flex gap-2">
+            <Menu
+              className="w-56 bg-transparent border-none"
+              selectable={false}
+              onClick={onClick}
+              mode="horizontal"
+              items={[
                 {
-                  label: "Theme",
-                  icon: theme === "dark" ? <SunOutlined /> : <MoonOutlined />,
-                  key: "theme",
+                  label: "Settings",
+                  key: "SubMenu",
+                  icon: <MenuOutlined />,
+                  children: [
+                    {
+                      label: "Theme",
+                      icon:
+                        theme === "dark" ? <SunOutlined /> : <MoonOutlined />,
+                      key: "theme",
+                    },
+                  ],
                 },
-              ],
-            },
-            {
-              label: "Profile",
-              key: "profile",
-              icon: <UserOutlined />,
-            },
-          ]}
-          triggerSubMenuAction="click"
-        />
-      </div>
-    </Header>
-  );
-};
-
-<Avatar icon={<UserOutlined />} />;
+                {
+                  label: "Profile",
+                  key: "profile",
+                  icon: <UserOutlined />,
+                  children: [
+                    {
+                      label: "Logout",
+                      icon: <LogoutOutlined />,
+                      key: "logout",
+                    },
+                  ],
+                },
+              ]}
+              triggerSubMenuAction="click"
+            />
+          </div>
+        </Header>
+      </>
+    );
+  },
+);
