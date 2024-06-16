@@ -1,5 +1,5 @@
 // types
-import { TTheme } from "@/types/general";
+import { TTheme } from "@/types/app/general";
 
 export const toggleHtmlTheme = (theme: TTheme) => {
   const htmlTag = document.getElementsByTagName("html")[0];
