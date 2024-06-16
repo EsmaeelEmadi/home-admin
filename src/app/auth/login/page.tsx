@@ -55,7 +55,6 @@ const LoginPage: FC = () => {
   const onSubmit = () => {
     trigger({ username: values.username, password: values.password })
       .then((data) => {
-        console.log({ data });
         storeCredentials(data);
         push("/dashboard");
       })

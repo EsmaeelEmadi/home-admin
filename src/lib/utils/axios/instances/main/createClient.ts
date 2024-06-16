@@ -76,23 +76,6 @@ export const createClient: TCreateClient = ({ options }) => {
         return Promise.reject(error);
       };
 
-      console.log({ error });
-
-      // console.log(
-      //   refreshToken?.refreshToken &&
-      //     error.response?.status === 401 &&
-      //     originalRequest?.url !== refreshTokenUrl &&
-      //     originalRequest?._retry !== true
-      // );
-
-      // console.log(
-      //   // refreshToken,
-      //   // error.response?.status,
-      //   originalRequest?.url,
-      //   refreshTokenUrl,
-      //   originalRequest?._retry
-      // );
-
       // Refresh token conditions
       if (
         error.response?.status === 401 &&
@@ -113,24 +96,15 @@ export const createClient: TCreateClient = ({ options }) => {
         isRefreshing = true;
         originalRequest._retry = true;
 
-        // const isAccessExpired = isTokenExpired(
-        //   access.issuedAt,
-        //   Number(access.expiresIn),
-        // );
-
         const cred = getCredentials();
 
-        console.log("condition 0");
-
         if (cred) {
-          console.log("condition 1");
           const isRefreshExpired = isTokenExpired(
             cred.issuedAt,
             Number(cred.refreshExpiresIn),
           );
 
           if (!isRefreshExpired) {
-            console.log("condition 2");
             return refresh(cred)
               .then((data) => {
                 storeCredentials(data.data);
@@ -141,41 +115,12 @@ export const createClient: TCreateClient = ({ options }) => {
                 isRefreshing = false;
               });
           } else {
-            console.log("condition 3");
             return handleError(error);
           }
         } else {
-          console.log("condition 4");
           isRefreshing = false;
         }
-
-        // return client
-        //   .post(refreshTokenUrl, {
-        //     refreshToken: refreshToken,
-        //   })
-        //   .then((res) => {
-        //     console.log(res);
-        //     const tokens = {
-        //       accessToken: res.data?.accessToken,
-        //       refreshToken: res.data?.refreshToken,
-        //     };
-        //     // setRefreshedTokens(tokens);
-        //     processQueue(null);
-
-        //     return client(originalRequest);
-        //   }, handleError)
-        //   .finally(() => {
-        //     isRefreshing = false;
-        //   });
       }
-
-      // // Refresh token missing or expired => logout user...
-      // if (
-      //   error.response?.status === 401 &&
-      //   error.response?.data?.message === "TokenExpiredError"
-      // ) {
-      //   return handleError(error);
-      // }
 
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       // Do something with response error

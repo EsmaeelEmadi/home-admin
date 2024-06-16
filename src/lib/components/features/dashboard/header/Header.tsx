@@ -57,10 +57,8 @@ export const DashboardHeader = memo<DashboardHeaderProps>(
       if (e.key === "theme") {
         toggleTheme();
       } else if (e.key === "logout") {
-        console.log("logout");
         logout()
           .then((data) => {
-            console.log({ data });
             replace("/auth/login");
           })
           .catch((error) => {
