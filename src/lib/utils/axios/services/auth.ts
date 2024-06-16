@@ -11,7 +11,7 @@ export const logout = () => {
 };
 
 export const refresh = (credentials: ICredentials) => {
-  return POST<AxiosResponse<ICredentials>>("auth/refresh", {
+  return POST<ICredentials>("auth/refresh", {
     arg: credentials,
   });
 };
