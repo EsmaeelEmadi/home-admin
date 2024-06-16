@@ -13,7 +13,7 @@ const { Title, Text } = Typography;
 
 const RegisterPage: FC = () => {
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
   };
 
   return (

@@ -13,7 +13,7 @@ const { Title, Text } = Typography;
 
 const ForgetPasswordPage: FC = () => {
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
   };
 
   return (
