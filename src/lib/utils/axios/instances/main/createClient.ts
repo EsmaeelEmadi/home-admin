@@ -96,7 +96,7 @@ export const createClient: TCreateClient = ({ options }) => {
 
         const cred = getCredentials();
 
-        if (cred) {
+        if (cred?.accessToken && cred.refreshToken) {
           const isRefreshExpired = isTokenExpired(
             cred.issuedAt,
             Number(cred.refreshExpiresIn),
