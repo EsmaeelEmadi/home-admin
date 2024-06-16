@@ -12,7 +12,7 @@ import type { FC } from "react";
 const { Title, Text } = Typography;
 
 const RegisterPage: FC = () => {
-  const onFinish = (values: any) => {
+  const onFinish = () => {
     // console.log("Received values of form: ", values);
   };
 

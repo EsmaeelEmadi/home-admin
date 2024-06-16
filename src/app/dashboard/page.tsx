@@ -73,7 +73,7 @@ const DashboardPage: FC = () => {
   return (
     <div className="h-full grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 auto-cols-fr auto-rows-fr">
       <div className=" bg-white dark:bg-dark p-8 rounded-3xl px-4 flex flex-col">
-        {/* @ts-ignore */}
+        {/* @ts-expect-error TODO: check options type */}
         <Bar options={options} data={data} />
       </div>
       <div className=" bg-white dark:bg-dark p-8 rounded-3xl px-4 flex flex-col content-center">

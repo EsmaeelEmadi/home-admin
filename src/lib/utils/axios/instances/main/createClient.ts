@@ -4,11 +4,10 @@ import { logout, refresh } from "../../services/auth";
 import {
   getAccessToken,
   getCredentials,
-  getRefreshToken,
   isTokenExpired,
   storeCredentials,
 } from "@/utils/auth";
-import axios, { AxiosError, AxiosInstance, CreateAxiosDefaults } from "axios";
+import axios, { AxiosInstance, CreateAxiosDefaults } from "axios";
 
 interface ICreateClientProps {
   options: CreateAxiosDefaults;
@@ -67,13 +66,12 @@ export const createClient: TCreateClient = ({ options }) => {
       originalRequest.headers = JSON.parse(
         JSON.stringify(originalRequest.headers || {}),
       );
-      const refreshToken = getRefreshToken();
 
       // If error, process all the requests in the queue and logout the user.
-      const handleError = (error: PromiseLike<unknown>) => {
-        processQueue(error);
+      const handleError = (err: PromiseLike<unknown>) => {
+        processQueue(err);
         logout();
-        return Promise.reject(error);
+        return Promise.reject(err);
       };
 
       // Refresh token conditions
@@ -83,7 +81,7 @@ export const createClient: TCreateClient = ({ options }) => {
         originalRequest?._retry !== true
       ) {
         if (isRefreshing) {
-          return new Promise(function (resolve, reject) {
+          return new Promise((resolve, reject) => {
             failedQueue.push({ resolve, reject });
           })
             .then(() => {
@@ -114,12 +112,11 @@ export const createClient: TCreateClient = ({ options }) => {
               .finally(() => {
                 isRefreshing = false;
               });
-          } else {
-            return handleError(error);
           }
-        } else {
-          isRefreshing = false;
+          return handleError(error);
         }
+
+        isRefreshing = false;
       }
 
       // Any status codes that falls outside the range of 2xx cause this function to trigger
