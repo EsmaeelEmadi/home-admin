@@ -66,7 +66,6 @@ const LoginPage: FC = () => {
             notif(error.message);
           }
         } else {
-          console.error({ error });
           notif("Unexpected Error");
         }
       });
