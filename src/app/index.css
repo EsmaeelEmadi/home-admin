@@ -7,3 +7,35 @@
     transform 0.3s,
     backdrop-filter 0s !important;
 }
+
+body {
+  --sb-track-color-light: #f5f5f5;
+  --sb-track-color-dark: #000000;
+  --sb-thumb-color: #096dd9;
+  --sb-size: 8px;
+}
+
+div::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+div::-webkit-scrollbar-track {
+  background: var(--sb-track-color-light);
+  border-radius: 3px;
+}
+
+html.dark div::-webkit-scrollbar-track {
+  background: var(--sb-track-color-dark);
+}
+
+div::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 3px;
+  /* border: 1px solid #f5f5f5; */
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
