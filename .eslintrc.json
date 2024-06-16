@@ -23,6 +23,8 @@
     "sourceType": "module"
   },
   "rules": {
+    "no-underscore-dangle": "off",
+    "no-param-reassign": "off",
     "import/order": "off",
     "no-restricted-syntax": "off",
     "import/extensions": "off",
