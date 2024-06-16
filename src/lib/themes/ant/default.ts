@@ -9,6 +9,7 @@ export const DARK_THEME: ThemeConfig = {
   components: {
     Layout: {
       colorBgHeader: "#141414",
+      colorBgBody: "#121212",
     },
   },
 } as const;
