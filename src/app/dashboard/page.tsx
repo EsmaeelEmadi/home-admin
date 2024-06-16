@@ -1,5 +1,12 @@
 "use client";
 
+import "mapbox-gl/dist/mapbox-gl.css";
+
+// hooks
+import { useAppContext } from "@/providers/AppProvider";
+
+// components
+import Map, { GeolocateControl } from "react-map-gl";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,10 +19,12 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { Button, Col, Row, Statistic } from "@/ant";
+
 // types
-import type { FC } from "react";
+import { type FC } from "react";
 import { blue, cyan } from "@ant-design/colors";
 
+// setup
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -70,8 +79,10 @@ const data = {
 };
 
 const DashboardPage: FC = () => {
+  const { theme } = useAppContext();
+
   return (
-    <div className="h-full grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 auto-cols-fr auto-rows-fr">
+    <div className="h-full grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 auto-cols-fr auto-rows-fr">
       <div className=" bg-white dark:bg-dark p-8 rounded-3xl px-4 flex flex-col">
         {/* @ts-expect-error TODO: check options type */}
         <Bar options={options} data={data} />
@@ -96,8 +107,26 @@ const DashboardPage: FC = () => {
       <div className=" bg-white dark:bg-dark p-8 rounded-3xl px-4 flex flex-col">
         hello
       </div>
-      <div className=" bg-white dark:bg-dark p-8 rounded-3xl px-4 flex flex-col">
-        2
+      <div className=" bg-white dark:bg-dark rounded-3xl flex flex-col">
+        <Map
+          mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX}
+          initialViewState={{
+            longitude: -100,
+            latitude: 40,
+            zoom: 3.5,
+          }}
+          mapStyle={
+            theme === "light"
+              ? "mapbox://styles/mapbox/light-v11"
+              : "mapbox://styles/mapbox/dark-v11"
+          }
+          style={{ borderRadius: "1.5rem" }}
+        >
+          <GeolocateControl
+            positionOptions={{ enableHighAccuracy: true }}
+            // trackUserLocation={true}
+          />
+        </Map>
       </div>
     </div>
   );
