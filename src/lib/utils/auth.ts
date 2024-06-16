@@ -24,9 +24,10 @@ export type TIsAuthenticated = () => Promise<boolean>;
 type TGetCredentials = () => ICredentials | undefined;
 
 export const isTokenExpired = (
-  issuedAt: number,
-  expiresIn: number,
+  issuedAt?: number,
+  expiresIn?: number,
 ): boolean => {
+  if (!issuedAt || !expiresIn) return false;
   return issuedAt + expiresIn * 1000 - new Date().getTime() < 0;
 };
 
@@ -115,7 +116,7 @@ export const isAuthenticated: TIsAuthenticated = async () => {
   const access = getAccessToken();
   const refresh = getRefreshToken();
 
-  if (!access || !refresh) return false;
+  if (!access?.accessToken || !refresh?.refreshToken) return false;
 
   const isAccessExpired = isTokenExpired(
     access.issuedAt,
