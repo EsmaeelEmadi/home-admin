@@ -17,7 +17,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
       <AntdRegistry>
         <html lang="en" className="h-full">
           <body className="m-0 h-full">
-            <AppContextProvider storageName="admin-theme">
+            <AppContextProvider>
               <App className="h-full">{children}</App>
             </AppContextProvider>
           </body>
