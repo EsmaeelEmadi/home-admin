@@ -3,7 +3,7 @@
 // types
 import type { FC } from "react";
 // components
-import { Button, Checkbox, Form, Input, Typography } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 import Link from "next/link";
 // icons
 import { MailOutlined } from "@ant-design/icons";
@@ -12,7 +12,7 @@ import { MailOutlined } from "@ant-design/icons";
 const { Title, Text } = Typography;
 
 const ForgetPasswordPage: FC = () => {
-  const onFinish = (values: any) => {
+  const onFinish = () => {
     // console.log("Received values of form: ", values);
   };
 
