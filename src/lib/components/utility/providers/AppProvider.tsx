@@ -7,11 +7,11 @@ import {
   useCallback,
   createContext,
 } from "react";
-
+// utils
+import { toggleHtmlTheme } from "@/utils/toggleHtmlTheme";
 // types
 import type { FC, PropsWithChildren } from "react";
-import type { TTheme } from "@/types/general";
-import { toggleHtmlTheme } from "@/utils/toggleHtmlTheme";
+import type { TTheme } from "@/types/app/general";
 
 type TToggleTheme = () => void;
 
@@ -25,31 +25,37 @@ export const AppContext = createContext<IAppContext>({
   toggleTheme: () => undefined,
 });
 
-interface AppContextProviderProps extends PropsWithChildren {
-  storageName: string;
-}
+interface AppContextProviderProps extends PropsWithChildren {}
 
 export const AppContextProvider: FC<AppContextProviderProps> = ({
   children,
-  storageName,
 }) => {
   const [isInitiated, setIsInitiated] = useState(false);
   const [theme, setTheme] = useState<TTheme>("light");
 
   const toggleTheme = useCallback(() => {
+    if (!process.env.NEXT_PUBLIC_STORAGE_THEME) {
+      throw new Error("unable to find theme storage path");
+    }
+
     const newTheme = theme === "dark" ? "light" : "dark";
     toggleHtmlTheme(newTheme);
-    localStorage.setItem(storageName, newTheme);
+    localStorage.setItem(process.env.NEXT_PUBLIC_STORAGE_THEME, newTheme);
     setTheme(newTheme);
-  }, [theme, storageName]);
+  }, [theme]);
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem(storageName) as TTheme | undefined;
+    if (!process.env.NEXT_PUBLIC_STORAGE_THEME) {
+      throw new Error("unable to find theme storage path");
+    }
+    const storedTheme = localStorage.getItem(
+      process.env.NEXT_PUBLIC_STORAGE_THEME,
+    ) as TTheme | undefined;
     const newTheme = storedTheme ?? "light";
     setTheme(newTheme);
     toggleHtmlTheme(newTheme);
     setIsInitiated(true);
-  }, [setTheme, setIsInitiated, storageName]);
+  }, [setTheme, setIsInitiated]);
 
   if (!isInitiated) return null;
 
