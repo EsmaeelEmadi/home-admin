@@ -1,7 +1,5 @@
 "use client";
 
-//  providers
-import { DashboardContextProvider } from "@/features/dashboard/provider/Provider";
 //  hooks
 import { useState, useCallback } from "react";
 import { useAppContext } from "@/providers/AppProvider";
@@ -9,11 +7,12 @@ import { useAppContext } from "@/providers/AppProvider";
 import { Layout, Flex, ConfigProvider } from "@/ant";
 import { DashboardHeader } from "@/features/dashboard/header/Header";
 import { DashboardSider } from "@/features/dashboard/sider/Sider";
-import { DashboardBreadcramb } from "@/features/dashboard/breadcrumb/Breadcrumb";
+// import { DashboardBreadcramb } from "@/features/dashboard/breadcrumb/Breadcrumb";
 // constants
 import { DARK_THEME, LIGHT_THEME } from "@/themes/ant/default";
 // types
 import type { FC, PropsWithChildren } from "react";
+import { WithAuth } from "@/components/utility/withAuth/WithAuth";
 
 // variables
 const { Content } = Layout;
@@ -28,9 +27,9 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   }, []);
 
   return (
-    <DashboardContextProvider>
+    <WithAuth>
       <ConfigProvider theme={appTheme === "dark" ? DARK_THEME : LIGHT_THEME}>
-        <Layout className="h-full">
+        <Layout className="h-full dark:bg-[121212]">
           <Flex className="w-full h-full p-4 flex gap-4">
             <DashboardSider isCollapsed={isCollapsed} />
             <Layout className="h-full flex gap-4">
@@ -38,13 +37,13 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
                 isCollapsed={isCollapsed}
                 toggleCollapse={toggleCollapse}
               />
-              <DashboardBreadcramb />
+              {/* <DashboardBreadcramb /> */}
               <Content>{children}</Content>
             </Layout>
           </Flex>
         </Layout>
       </ConfigProvider>
-    </DashboardContextProvider>
+    </WithAuth>
   );
 };
 
