@@ -2,7 +2,7 @@
 
 // hooks
 import useSWRMutation from "swr/mutation";
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 
 // helpers
 import { residentialPost } from "@/utils/axios/services/residential";
@@ -15,11 +15,13 @@ import { ResidentialRentForm } from "@/features/forms/ResidentialRent";
 import type { FC } from "react";
 import type { IResidentialPost } from "@/types/api/residential";
 import { AxiosError } from "axios";
+import { TextAreaRef } from "antd/es/input/TextArea";
 
 // variables
 const { Title, Text } = Typography;
 
 const PropertyPage: FC = () => {
+  const addressInputRef = useRef<TextAreaRef>(null);
   const [form] = Form.useForm<IResidentialPost>();
   const [api, contextHolder] = notification.useNotification();
 
@@ -51,6 +53,14 @@ const PropertyPage: FC = () => {
       .then(() => {
         notif("success", "New residential has been created");
         form.resetFields();
+        console.log(addressInputRef.current);
+        setTimeout(() => {
+          if (addressInputRef.current) {
+            addressInputRef.current.focus();
+          } else {
+            throw new Error("Unable to find address input field ref");
+          }
+        }, 0);
       })
       .catch((error: unknown) => {
         if (error instanceof AxiosError) {
@@ -73,6 +83,7 @@ const PropertyPage: FC = () => {
             <Text>Here is some subtext</Text>
           </div>
           <ResidentialRentForm
+            ref={addressInputRef}
             isMutating={isMutating}
             form={form}
             onSubmit={onSubmit}

@@ -1,3 +1,5 @@
+import { forwardRef } from "react";
+
 // components
 import {
   Button,
@@ -9,21 +11,18 @@ import {
   DatePicker,
 } from "antd";
 import { FormInstance } from "antd/es/form/Form";
-
-// types
-import type { FC } from "react";
+import { TextAreaRef } from "antd/es/input/TextArea";
 
 interface IResidentialFormProps {
   isMutating: boolean;
   form: FormInstance;
   onSubmit: () => void;
 }
-
-export const ResidentialRentForm: FC<IResidentialFormProps> = ({
-  isMutating,
-  form,
-  onSubmit,
-}) => {
+// : FC<IResidentialFormProps>
+export const ResidentialRentForm = forwardRef<
+  TextAreaRef,
+  IResidentialFormProps
+>(({ isMutating, form, onSubmit }, ref) => {
   return (
     <Form
       form={form}
@@ -35,7 +34,7 @@ export const ResidentialRentForm: FC<IResidentialFormProps> = ({
         name="address"
         rules={[{ required: true, message: "Please enter Address!" }]}
       >
-        <Input.TextArea placeholder="Address" autoSize />
+        <Input.TextArea placeholder="Address" autoSize ref={ref} />
       </Form.Item>
 
       <Form.Item
@@ -83,4 +82,4 @@ export const ResidentialRentForm: FC<IResidentialFormProps> = ({
       </Form.Item>
     </Form>
   );
-};
+});
