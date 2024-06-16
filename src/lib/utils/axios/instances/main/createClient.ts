@@ -1,5 +1,6 @@
 "use client";
 
+import { ICredentials } from "@/types/api/auth";
 import { logout, refresh } from "../../services/auth";
 import {
   getAccessToken,
@@ -105,7 +106,7 @@ export const createClient: TCreateClient = ({ options }) => {
           if (!isRefreshExpired) {
             return refresh(cred)
               .then((data) => {
-                storeCredentials(data.data);
+                storeCredentials(data);
                 processQueue(null);
                 return client(originalRequest);
               }, handleError)
