@@ -1,4 +1,4 @@
-import { ICredentials, ILoginRequest } from "@/types/api/auth";
+import { ICredentials } from "@/types/api/auth";
 import { POST, PUT } from "../instances/main/fetcher";
 import { AxiosResponse } from "axios";
 
