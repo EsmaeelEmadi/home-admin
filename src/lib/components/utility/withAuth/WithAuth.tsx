@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { isAuthenticated } from "@/utils/auth";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 // types
 import type { FC, PropsWithChildren } from "react";
 
 export const WithAuth: FC<PropsWithChildren> = ({ children }) => {
   const [isAuth, setIsAuth] = useState<boolean | undefined>(true);
+  const { replace } = useRouter();
   const pathName = usePathname();
 
   useEffect(() => {
@@ -17,7 +18,10 @@ export const WithAuth: FC<PropsWithChildren> = ({ children }) => {
     })();
   }, [pathName]);
 
+  useEffect(() => {
+    if (isAuth === false) replace("/auth/login");
+  }, [isAuth, replace]);
+
   if (isAuth === undefined) return <p>wait</p>;
-  if (!isAuth) redirect("/auth/login");
   return children;
 };
