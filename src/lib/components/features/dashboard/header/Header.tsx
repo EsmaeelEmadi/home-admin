@@ -5,6 +5,7 @@ import classNames from "classnames";
 // hooks
 import { useCallback, memo } from "react";
 import { useAppContext } from "@/providers/AppProvider";
+import { useDimension } from "@/components/utility/useDimension/useDimension";
 
 // helpers
 import { logout } from "@/utils/axios/services/auth";
@@ -21,6 +22,7 @@ import {
   MoonOutlined,
   SunOutlined,
   LogoutOutlined,
+  PartitionOutlined,
 } from "@ant-design/icons";
 
 // types
@@ -28,13 +30,14 @@ import type { MenuProps } from "antd";
 import type { ISider } from "../types";
 import { AxiosError } from "axios";
 
-interface DashboardHeaderProps extends ISider {}
+interface DashboardHeaderProps extends Omit<ISider, "expand" | "collapse"> {}
 
 // variables
 const { Header } = Layout;
 
 export const DashboardHeader = memo<DashboardHeaderProps>(
   ({ isCollapsed, toggleCollapse }) => {
+    const { dimension } = useDimension();
     const [api, contextHolder] = notification.useNotification();
 
     const { replace } = useRouter();
@@ -79,19 +82,29 @@ export const DashboardHeader = memo<DashboardHeaderProps>(
             "rounded-3xl h-[60px] px-2 flex place-content-between items-center",
           )}
         >
-          <Button
-            type="link"
-            className="m-2"
-            icon={
-              <LeftOutlined
-                className={classNames("transition-all", {
-                  "rotate-180": isCollapsed,
-                })}
-              />
-            }
-            onClick={toggleCollapse}
-            shape="circle"
-          />
+          {dimension.media !== "sm" ? (
+            <Button
+              type="link"
+              className="m-2"
+              icon={
+                <LeftOutlined
+                  className={classNames("transition-all", {
+                    "rotate-180": isCollapsed,
+                  })}
+                />
+              }
+              onClick={toggleCollapse}
+              shape="circle"
+            />
+          ) : (
+            <Button
+              type="link"
+              className="m-2"
+              icon={<PartitionOutlined />}
+              onClick={toggleCollapse}
+              shape="circle"
+            />
+          )}
           <div className="-mr-4 flex gap-2">
             <Menu
               className="w-56 bg-transparent border-none"
