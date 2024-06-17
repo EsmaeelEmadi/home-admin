@@ -26,12 +26,20 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
     setIsCollapsed((prev) => !prev);
   }, []);
 
+  const collapse = useCallback(() => {
+    setIsCollapsed(false);
+  }, []);
+
   return (
     <WithAuth>
       <ConfigProvider theme={appTheme === "dark" ? DARK_THEME : LIGHT_THEME}>
         <Layout className="h-full dark:bg-[121212]">
           <Flex className="w-full h-full p-4 flex gap-4">
-            <DashboardSider isCollapsed={isCollapsed} />
+            <DashboardSider
+              isCollapsed={isCollapsed}
+              collapse={collapse}
+              toggleCollapse={toggleCollapse}
+            />
             <Layout className="h-full flex gap-4">
               <DashboardHeader
                 isCollapsed={isCollapsed}
