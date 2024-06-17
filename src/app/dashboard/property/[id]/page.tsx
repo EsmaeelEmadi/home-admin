@@ -15,6 +15,7 @@ import {
 import { Form, Typography, Spin, notification, Alert, Empty } from "@/ant";
 import { ResidentialRentForm } from "@/features/forms/ResidentialRent";
 import { LoadingOutlined } from "@ant-design/icons";
+import PageTransition from "@/components/utility/transitions/PageTransition";
 
 // types
 import type { FC } from "react";
@@ -89,34 +90,36 @@ const PropertyEdit: FC<IPropertyEdit> = ({ params }) => {
   return (
     <>
       {contextHolder}
-      <div className="flex flex-col h-full bg-white dark:bg-dark p-8 rounded-3xl">
-        {isLoading ? (
-          <div className="flex items-center self-center h-full">
-            <Spin indicator={<LoadingOutlined spin />} size="large" />
-          </div>
-        ) : null}
-        {/* TODO: manage error message */}
-        {error ? (
-          <Alert message="Error" description={error} type="error" showIcon />
-        ) : null}
-        {data ? (
-          <div className="place-self-center">
-            <div className="mb-8">
-              <Title level={2} className="mb-1">
-                Edit Residential
-              </Title>
-              <Text>Here is some subtext</Text>
+      <PageTransition>
+        <div className="flex flex-col h-full bg-white dark:bg-dark p-8 rounded-3xl">
+          {isLoading ? (
+            <div className="flex items-center self-center h-full">
+              <Spin indicator={<LoadingOutlined spin />} size="large" />
             </div>
-            <ResidentialRentForm
-              isMutating={isMutating}
-              form={form}
-              onSubmit={onSubmit}
-            />
-          </div>
-        ) : (
-          <Empty />
-        )}
-      </div>
+          ) : null}
+          {/* TODO: manage error message */}
+          {error ? (
+            <Alert message="Error" description={error} type="error" showIcon />
+          ) : null}
+          {data ? (
+            <div className="place-self-center">
+              <div className="mb-8">
+                <Title level={2} className="mb-1">
+                  Edit Residential
+                </Title>
+                <Text>Here is some subtext</Text>
+              </div>
+              <ResidentialRentForm
+                isMutating={isMutating}
+                form={form}
+                onSubmit={onSubmit}
+              />
+            </div>
+          ) : (
+            <Empty />
+          )}
+        </div>
+      </PageTransition>{" "}
     </>
   );
 };

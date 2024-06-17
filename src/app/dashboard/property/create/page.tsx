@@ -10,6 +10,7 @@ import { residentialPost } from "@/utils/axios/services/residential";
 // components
 import { Form, Typography, notification } from "antd";
 import { ResidentialRentForm } from "@/features/forms/ResidentialRent";
+import PageTransition from "@/components/utility/transitions/PageTransition";
 
 // types
 import type { FC } from "react";
@@ -74,22 +75,24 @@ const PropertyPage: FC = () => {
   return (
     <>
       {contextHolder}
-      <div className="flex flex-col h-full bg-white dark:bg-dark p-8 rounded-3xl">
-        <div className="place-self-center">
-          <div className="mb-8">
-            <Title level={2} className="mb-1">
-              Create New Residential
-            </Title>
-            <Text>Here is some subtext</Text>
+      <PageTransition>
+        <div className="flex flex-col h-full bg-white dark:bg-dark p-8 rounded-3xl">
+          <div className="place-self-center">
+            <div className="mb-8">
+              <Title level={2} className="mb-1">
+                Create New Residential
+              </Title>
+              <Text>Here is some subtext</Text>
+            </div>
+            <ResidentialRentForm
+              ref={addressInputRef}
+              isMutating={isMutating}
+              form={form}
+              onSubmit={onSubmit}
+            />
           </div>
-          <ResidentialRentForm
-            ref={addressInputRef}
-            isMutating={isMutating}
-            form={form}
-            onSubmit={onSubmit}
-          />
         </div>
-      </div>
+      </PageTransition>
     </>
   );
 };

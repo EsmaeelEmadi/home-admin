@@ -15,6 +15,7 @@ import {
 
 // components
 import { Table, Pagination, notification } from "@/ant";
+import PageTransition from "@/components/utility/transitions/PageTransition";
 
 // types
 import type { FC } from "react";
@@ -71,38 +72,40 @@ const PropertyPage: FC = () => {
   return (
     <>
       {contextHolder}
-      <div className="h-full bg-white dark:bg-dark p-8 rounded-3xl px-4 flex flex-col">
-        <div className="overflow-y-auto px-4 flex-1">
-          {/**
-           * I do need to add a key for eack item in the list
-           * TODO: improve adding keys to list items
-           */}
-          <Table
-            dataSource={
-              data?.content
-                ? (data.content as TListWithKey<IResidential>).map((d) => {
-                    d.key = d.id;
-                    return d;
-                  })
-                : []
-            }
-            columns={createResidentialRentColumns(handleDelete, handleEdit)}
-            size="large"
-            bordered
-            pagination={false}
-            scroll={{ scrollToFirstRowOnChange: true }}
-          />
-        </div>
-        <div className="pt-6 flex justify-end">
-          {data ? (
-            <Pagination
-              current={data?.pageable.pageNumber}
-              pageSize={data?.pageable.pageSize}
-              total={data?.totalElements}
+      <PageTransition>
+        <div className="h-full bg-white dark:bg-dark p-8 rounded-3xl px-4 flex flex-col">
+          <div className="overflow-y-auto px-4 flex-1">
+            {/**
+             * I do need to add a key for eack item in the list
+             * TODO: improve adding keys to list items
+             */}
+            <Table
+              dataSource={
+                data?.content
+                  ? (data.content as TListWithKey<IResidential>).map((d) => {
+                      d.key = d.id;
+                      return d;
+                    })
+                  : []
+              }
+              columns={createResidentialRentColumns(handleDelete, handleEdit)}
+              size="large"
+              bordered
+              pagination={false}
+              scroll={{ scrollToFirstRowOnChange: true }}
             />
-          ) : null}
+          </div>
+          <div className="pt-6 flex justify-end">
+            {data ? (
+              <Pagination
+                current={data?.pageable.pageNumber}
+                pageSize={data?.pageable.pageSize}
+                total={data?.totalElements}
+              />
+            ) : null}
+          </div>
         </div>
-      </div>
+      </PageTransition>
     </>
   );
 };
