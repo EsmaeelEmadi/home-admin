@@ -74,9 +74,9 @@ const LoginPage: FC = () => {
   return (
     <>
       {contextHolder}
-      <div>
-        <div className="p-14 shadow-2xl rounded-xl bg-white dark:bg-dark">
-          <div className="mb-6">
+      <div className="h-full md:h-fit">
+        <div className="flex flex-col justify-center p-0 md:p-14 shadow-2xl rounded-none md:rounded-xl h-full md:h-fit bg-white dark:bg-dark">
+          <div className="mb-6 px-8 md:p-0">
             <Title level={2} className="mb-1">
               Login
             </Title>
@@ -86,10 +86,10 @@ const LoginPage: FC = () => {
           <Form
             form={form}
             name="normal_login"
-            className="login-form"
+            className="login-form w-svw md:w-96 px-8 md:p-0"
             initialValues={{ remember: true }}
             onFinish={onSubmit}
-            style={{ width: 350 }}
+            // style={{ width: 350 }}
           >
             <Form.Item
               name="username"
