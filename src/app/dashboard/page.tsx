@@ -82,7 +82,7 @@ const DashboardPage: FC = () => {
   const { theme } = useAppContext();
 
   return (
-    <div className="h-full grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 auto-cols-fr auto-rows-fr">
+    <div className="h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 auto-cols-fr auto-rows-fr">
       <div className=" bg-white dark:bg-dark p-8 rounded-3xl px-4 flex flex-col">
         {/* @ts-expect-error TODO: check options type */}
         <Bar options={options} data={data} />
