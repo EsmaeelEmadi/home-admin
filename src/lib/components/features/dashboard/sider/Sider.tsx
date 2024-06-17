@@ -53,7 +53,7 @@ export const DashboardSider: FC<DashboardSiderProps> = ({
           />
         </div>
         <Divider />
-        <DashboardSiderMenu />
+        <DashboardSiderMenu className="mt-0" />
       </Drawer>
     );
   }
