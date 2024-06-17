@@ -24,7 +24,7 @@ const AuthLayout: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <ConfigProvider theme={appTheme === "dark" ? DARK_THEME : LIGHT_THEME}>
-      <div className="absolute top-4 right-0 left-0 flex place-content-between align-center px-8">
+      <div className="absolute top-4 right-0 left-0 flex place-content-between items-center px-8">
         <LogoTypeSvg className="w-36 fill-blue-600 h-fit" />
         <Menu
           className="bg-transparent border-none"
