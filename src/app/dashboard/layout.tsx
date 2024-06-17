@@ -41,12 +41,15 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
               toggleCollapse={toggleCollapse}
             />
             <Layout className="h-full flex gap-4">
-              <DashboardHeader
-                isCollapsed={isCollapsed}
-                toggleCollapse={toggleCollapse}
-              />
               {/* <DashboardBreadcramb /> */}
-              <Content>{children}</Content>
+              <Content className="h-full flex flex-col gap-4">
+                <DashboardHeader
+                  isCollapsed={isCollapsed}
+                  toggleCollapse={toggleCollapse}
+                />
+
+                {children}
+              </Content>
             </Layout>
           </Flex>
         </Layout>
