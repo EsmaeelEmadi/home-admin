@@ -90,7 +90,7 @@ const PropertyEdit: FC<IPropertyEdit> = ({ params }) => {
   return (
     <>
       {contextHolder}
-      <PageTransition>
+      <PageTransition className="flex-1">
         <div className="flex flex-col h-full bg-white dark:bg-dark p-8 rounded-3xl">
           {isLoading ? (
             <div className="flex items-center self-center h-full">

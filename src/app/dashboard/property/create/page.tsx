@@ -75,7 +75,7 @@ const PropertyPage: FC = () => {
   return (
     <>
       {contextHolder}
-      <PageTransition>
+      <PageTransition className="flex-1">
         <div className="flex flex-col h-full bg-white dark:bg-dark p-8 rounded-3xl">
           <div className="place-self-center">
             <div className="mb-8">
