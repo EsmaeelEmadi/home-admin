@@ -2,8 +2,9 @@
 
 // hooks
 import { useCallback } from "react";
-import { useSearch } from "@/components/utility/useSearch/UseSearch";
 import useSWRMutation from "swr/mutation";
+import { useSearch } from "@/components/utility/useSearch/UseSearch";
+import { useDimension } from "@/components/utility/useDimension/useDimension";
 
 // helpers
 import { useRouter } from "next/navigation";
@@ -25,6 +26,7 @@ import type { TListWithKey } from "@/types/utility";
 import { AxiosError } from "axios";
 
 const PropertyPage: FC = () => {
+  const { dimension } = useDimension();
   const { push } = useRouter();
   const [api, contextHolder] = notification.useNotification();
 
@@ -33,7 +35,7 @@ const PropertyPage: FC = () => {
     residentialDelete,
   );
 
-  const { data } = useSearch<IResponse<IResidential>>(
+  const { data, isLoading } = useSearch<IResponse<IResidential>>(
     "residential/rent",
     residentialGetAll,
   );
@@ -72,14 +74,15 @@ const PropertyPage: FC = () => {
   return (
     <>
       {contextHolder}
-      <PageTransition>
-        <div className="h-full bg-white dark:bg-dark p-8 rounded-3xl px-4 flex flex-col">
-          <div className="overflow-y-auto px-4 flex-1">
+      <PageTransition className="flex-1 overflow-auto">
+        <div className="h-full md:w-full bg-white dark:bg-dark p-8 rounded-3xl px-4 flex flex-col">
+          <div className="overflow-auto px-4 relative h-full w-full">
             {/**
              * I do need to add a key for eack item in the list
              * TODO: improve adding keys to list items
              */}
             <Table
+              className="absolute top-0 right-0 left-0 bottom-0"
               dataSource={
                 data?.content
                   ? (data.content as TListWithKey<IResidential>).map((d) => {
@@ -90,12 +93,16 @@ const PropertyPage: FC = () => {
               }
               columns={createResidentialRentColumns(handleDelete, handleEdit)}
               size="large"
-              bordered
+              // bordered
+              loading={isLoading}
               pagination={false}
-              scroll={{ scrollToFirstRowOnChange: true }}
             />
           </div>
-          <div className="pt-6 flex justify-end">
+        </div>
+      </PageTransition>
+      <PageTransition>
+        <div className="md:w-full flex flex-row-reverse items-center bg-white dark:bg-dark px-8 h-[60px]  rounded-3xl">
+          <div className="flex justify-end">
             {data ? (
               <Pagination
                 current={data?.pageable.pageNumber}
