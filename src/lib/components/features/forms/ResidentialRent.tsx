@@ -24,12 +24,7 @@ export const ResidentialRentForm = forwardRef<
   IResidentialFormProps
 >(({ isMutating, form, onSubmit }, ref) => {
   return (
-    <Form
-      form={form}
-      name="create_new_residential"
-      onFinish={onSubmit}
-      style={{ width: 500 }}
-    >
+    <Form form={form} name="create_new_residential" onFinish={onSubmit}>
       <Form.Item
         name="address"
         rules={[{ required: true, message: "Please enter Address!" }]}
