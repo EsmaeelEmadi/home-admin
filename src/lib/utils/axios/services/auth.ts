@@ -1,6 +1,5 @@
 import { ICredentials } from "@/types/api/auth";
 import { POST, PUT } from "../instances/main/fetcher";
-import { AxiosResponse } from "axios";
 
 export const login = (url: string, args: any) => {
   return POST(url, args);
