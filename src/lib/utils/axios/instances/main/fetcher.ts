@@ -16,8 +16,9 @@ export const POST = <T>(
 };
 
 export const PUT = <T>(url: string, data: any, config?: AxiosRequestConfig) => {
+  console.log({ data });
   return client
-    .put(url, data.arg, config)
+    .put(url, data?.arg, config)
     .then((response) => response.data as T);
 };
 
