@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 // hooks
 import { usePathname, useRouter } from "next/navigation";
 import { useMemo } from "react";
@@ -11,7 +13,13 @@ import { Menu } from "@/ant";
 // types
 import type { FC } from "react";
 
-export const DashboardSiderMenu: FC = () => {
+interface IDashboardSiderMenuProps {
+  className?: string;
+}
+
+export const DashboardSiderMenu: FC<IDashboardSiderMenuProps> = ({
+  className,
+}) => {
   const { push } = useRouter();
   const pathName = usePathname();
 
@@ -23,7 +31,7 @@ export const DashboardSiderMenu: FC = () => {
 
   return (
     <Menu
-      className="mt-[75px] border-0"
+      className={classNames("mt-[75px] border-0", className)}
       mode="inline"
       selectedKeys={selectedKey}
       items={createDashboardSiderItems(pathName, push)}
