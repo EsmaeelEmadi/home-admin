@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
-export default function ({
+export default function PageTransition({
   children,
   className,
 }: {
