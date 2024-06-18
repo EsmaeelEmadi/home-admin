@@ -27,6 +27,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "react/require-default-props": "off",
     "import/no-cycle": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "no-unused-vars": "off",
