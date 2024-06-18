@@ -1,6 +1,5 @@
 "use client";
 
-import { ICredentials } from "@/types/api/auth";
 import { logout, refresh } from "../../services/auth";
 import {
   getAccessToken,

@@ -42,8 +42,6 @@ export const useDimension = () => {
         media = "2xl";
       }
 
-      console.log({ media, w });
-
       setDimension({
         width: w,
         height: h,

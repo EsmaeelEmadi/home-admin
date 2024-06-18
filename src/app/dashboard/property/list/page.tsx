@@ -4,7 +4,6 @@
 import { useCallback } from "react";
 import useSWRMutation from "swr/mutation";
 import { useSearch } from "@/components/utility/useSearch/UseSearch";
-import { useDimension } from "@/components/utility/useDimension/useDimension";
 
 // helpers
 import { useRouter } from "next/navigation";
@@ -26,7 +25,6 @@ import type { TListWithKey } from "@/types/utility";
 import { AxiosError } from "axios";
 
 const PropertyPage: FC = () => {
-  const { dimension } = useDimension();
   const { push } = useRouter();
   const [api, contextHolder] = notification.useNotification();
 

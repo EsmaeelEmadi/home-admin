@@ -54,7 +54,6 @@ const PropertyPage: FC = () => {
       .then(() => {
         notif("success", "New residential has been created");
         form.resetFields();
-        console.log(addressInputRef.current);
         setTimeout(() => {
           if (addressInputRef.current) {
             addressInputRef.current.focus();
