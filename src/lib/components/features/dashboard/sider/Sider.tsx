@@ -32,7 +32,7 @@ export const DashboardSider: FC<DashboardSiderProps> = ({
     if (dimension.media === "sm") {
       collapse();
     }
-  }, [dimension.media]);
+  }, [dimension.media, collapse]);
 
   if (dimension.media === "sm") {
     return (
