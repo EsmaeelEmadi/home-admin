@@ -6,7 +6,7 @@ import useSWRMutation from "swr/mutation";
 import { useSearch } from "@/components/utility/useSearch/UseSearch";
 
 // helpers
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { createResidentialRentColumns } from "@/utils/tableSchemas/residentialRent";
 import {
   residentialDelete,
@@ -26,6 +26,8 @@ import { AxiosError } from "axios";
 
 const PropertyPage: FC = () => {
   const { push } = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [api, contextHolder] = notification.useNotification();
 
   const { trigger: triggerDelete } = useSWRMutation<any, any, string, number>(
@@ -69,6 +71,20 @@ const PropertyPage: FC = () => {
     push(`/dashboard/property/${id}`);
   };
 
+  const handlePageChange = (newPage: number) => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    if (searchParams.has("page")) {
+      current.delete("page");
+    }
+
+    current.set("page", (newPage - 1).toString());
+
+    const search = current.toString();
+    const query = search ? `?${search}` : "";
+
+    push(`${pathname}${query}`);
+  };
+
   return (
     <>
       {contextHolder}
@@ -103,7 +119,10 @@ const PropertyPage: FC = () => {
           <div className="flex justify-end">
             {data ? (
               <Pagination
-                current={data?.pageable.pageNumber}
+                onChange={(newPage) => {
+                  handlePageChange(newPage);
+                }}
+                current={(data?.pageable.pageNumber ?? 0) + 1}
                 pageSize={data?.pageable.pageSize}
                 total={data?.totalElements}
               />

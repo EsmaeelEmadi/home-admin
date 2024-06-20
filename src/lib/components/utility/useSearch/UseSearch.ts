@@ -35,16 +35,16 @@ export const useSearch = <Res>(path: string, fetcher: Fetcher<any, any>) => {
         handleChange(key, value);
       }
 
-      if (!searchParams.has("pageNumber")) {
-        handleChange("pageNumber", "1");
+      if (!searchParams.has("page")) {
+        handleChange("page", "0");
       }
 
-      if (!searchParams.has("pageSize")) {
-        handleChange("pageSize", "10");
+      if (!searchParams.has("size")) {
+        handleChange("size", "10");
       }
     } else {
-      handleChange("pageSize", "10");
-      handleChange("pageNumber", "1");
+      handleChange("size", "10");
+      handleChange("page", "0");
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
