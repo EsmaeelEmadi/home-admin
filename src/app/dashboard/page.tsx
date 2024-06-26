@@ -1,11 +1,10 @@
 "use client";
 
 import "mapbox-gl/dist/mapbox-gl.css";
-import ApexCharts from "apexcharts";
 
 // hooks
 import { useAppContext } from "@/providers/AppProvider";
-
+import { useEffect, useState } from "react";
 // components
 import Map, { GeolocateControl } from "react-map-gl";
 import { Typography, Statistic } from "@/ant";
@@ -14,9 +13,11 @@ import { Typography, Statistic } from "@/ant";
 import { LikeOutlined } from "@ant-design/icons";
 
 // types
-import { useEffect, type FC } from "react";
+import { type FC } from "react";
 import { blue, cyan, gold, purple, volcano } from "@ant-design/colors";
 import { TTheme } from "@/types/app/general";
+
+let ApexCharts: { default: any; prototype?: any };
 
 const { Title, Paragraph } = Typography;
 
@@ -144,6 +145,8 @@ interface IMapBoxComponentProps {
 }
 
 const MapBoxComponent: FC<IMapBoxComponentProps> = ({ theme }) => {
+  if (typeof window === "undefined") return null;
+
   return (
     <Map
       mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX}
@@ -169,19 +172,35 @@ const MapBoxComponent: FC<IMapBoxComponentProps> = ({ theme }) => {
 
 const DashboardPage: FC = () => {
   const { theme } = useAppContext();
+  const [isApexLoaded, setIsApexLoaded] = useState(false);
 
   useEffect(() => {
-    const chart = new ApexCharts(document.querySelector("#chart"), opts);
+    (async () => {
+      ApexCharts = await import("apexcharts");
+      setIsApexLoaded(true);
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (!isApexLoaded) return;
+
+    const chart = new ApexCharts.default(
+      document.querySelector("#chart"),
+      opts,
+    );
     chart.render();
 
-    const chart2 = new ApexCharts(document.querySelector("#chart2"), options);
+    const chart2 = new ApexCharts.default(
+      document.querySelector("#chart2"),
+      options,
+    );
     chart2.render();
 
     return () => {
       chart.destroy();
       chart2.destroy();
     };
-  }, []);
+  }, [isApexLoaded]);
 
   // grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 auto-cols-fr auto-rows-fr
   return (
