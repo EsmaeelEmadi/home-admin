@@ -27,6 +27,8 @@
     "sourceType": "module"
   },
   "rules": {
+    "new-cap": "off",
+    "consistent-return": "off",
     "react/require-default-props": "off",
     "import/no-cycle": "off",
     "@typescript-eslint/no-explicit-any": "off",
